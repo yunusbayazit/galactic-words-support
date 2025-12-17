@@ -64,7 +64,8 @@
         .phone-frame {
             position: relative;
             width: 300px;
-            /* Adjust based on aspect ratio */
+            /* iPhone 14 Pro aspect ratio approx 19.5:9 */
+            aspect-ratio: 9/19.5;
             border-radius: 40px;
             border: 8px solid #2a2a4a;
             box-shadow:
@@ -87,7 +88,10 @@
         .phone-frame img {
             display: block;
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
+            /* Ensures image fills the frame */
+            object-position: center;
         }
 
         /* Download Button */

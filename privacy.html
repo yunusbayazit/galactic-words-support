@@ -78,17 +78,44 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 80px 24px;
+            padding: 60px 24px;
         }
 
         .header {
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             text-align: center;
+        }
+
+        /* Language Toggle */
+        .lang-selector {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .lang-btn {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
         }
 
         h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-size: clamp(2.2rem, 6vw, 3.5rem);
             font-weight: 900;
             background: linear-gradient(135deg, #FFF 0%, #A78BFA 100%);
             -webkit-background-clip: text;
@@ -112,12 +139,45 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         h2 {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--primary);
-            margin: 40px 0 16px;
+            margin: 36px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 1.2em;
+            background: var(--primary);
+            border-radius: 2px;
+            display: inline-block;
         }
 
         h2:first-of-type {
@@ -190,7 +250,6 @@
             background: rgba(255, 255, 255, 0.08);
             border-color: var(--primary);
             transform: translateX(-4px);
-            text-decoration: none;
         }
 
         @media (max-width: 640px) {
@@ -210,55 +269,158 @@
 
     <div class="container">
         <header class="header">
-            <h1>Privacy Policy</h1>
-            <p class="last-updated">Last updated: December 27, 2025</p>
+            <div class="lang-selector">
+                <button class="lang-btn active" onclick="setLang('en')">English</button>
+                <button class="lang-btn" onclick="setLang('tr')">Türkçe</button>
+            </div>
+
+            <div id="en-title" class="lang-content active">
+                <h1>Privacy Policy</h1>
+                <p class="last-updated">Last updated: December 27, 2025</p>
+            </div>
+            <div id="tr-title" class="lang-content">
+                <h1>Gizlilik Politikası</h1>
+                <p class="last-updated">Son Güncelleme: 27 Aralık 2025</p>
+            </div>
         </header>
 
         <main class="content-card">
-            <p>
-                At <strong>Galactic Words</strong>, we prioritize your privacy above all. This policy outlines how we
-                handle your information to ensure a secure and enjoyable cosmic journey.
-            </p>
+            <!-- English Content -->
+            <div id="en-content" class="lang-content active">
+                <p>
+                    This Privacy Policy explains how <strong>YUNUS EMRE BAYAZIT</strong> ("Developer", "we", or "us")
+                    collects, uses, and discloses information about you when you use our mobile application,
+                    <strong>Galactic Words</strong> (the "App").
+                </p>
+                <p>By using the App, you agree to the collection and use of information in accordance with this policy.
+                </p>
 
-            <h2>1. Information Collection</h2>
-            <p>To provide a personalized experience, we collect minimal data:</p>
-            <ul>
-                <li><strong>Account Credentials:</strong> When using Apple Sign In, we receive a unique identifier and
-                    your basic profile name.</li>
-                <li><strong>Galactic Progress:</strong> We store your level data, achievements, and currency balance
-                    across the stars.</li>
-                <li><strong>Cosmic Performance:</strong> Anonymous data regarding app stability and performance to help
-                    us improve the experience.</li>
-            </ul>
+                <h2>1. Information Collection and Use</h2>
+                <p>We do not collect any personally identifiable information (such as your name, address, or phone
+                    number) directly. However, the App uses third-party services that may collect information used to
+                    identify you for advertising and analytics purposes.</p>
 
-            <h2>2. How We Use Data</h2>
-            <p>Your data is strictly used for:</p>
-            <ul>
-                <li>Synchronizing your progress across different devices.</li>
-                <li>Providing customer support and technical assistance.</li>
-                <li>Analyzing game patterns to create more challenging and fun levels.</li>
-            </ul>
+                <h2>2. Third-Party Services & Advertising</h2>
+                <p>The App uses third-party services that may collect information used to identify you. The precise data
+                    collected can include your device's Internet Protocol ("IP") address, device name, operating system
+                    version, the configuration of the app, and other statistics.</p>
+                <p>Link to privacy policy of third-party service providers used by the App:</p>
+                <ul>
+                    <li><a href="https://policies.google.com/privacy" target="_blank">Google AdMob & Firebase
+                            Analytics</a></li>
+                </ul>
 
-            <h2>3. Security Standards</h2>
-            <p>Your data is protected using industry-leading encryption. We utilize <strong>Firebase Cloud
-                    Services</strong> to ensure your information is stored in highly secure, world-class data centers.
-            </p>
+                <h2>3. Log Data</h2>
+                <p>We want to inform you that whenever you use our Service, in a case of an error in the app, we collect
+                    data and information (through third-party products) on your phone called Log Data. This Log Data may
+                    include information such as your device IP address, device name, operating system version, the
+                    configuration of the app when utilizing our Service, the time and date of your use of the Service,
+                    and other statistics.</p>
 
-            <h2>4. Third-Party Partners</h2>
-            <p>We work with trusted partners to enhance your experience:</p>
-            <ul>
-                <li><strong>RevenueCat:</strong> Secure management of in-app galactic purchases.</li>
-                <li><strong>Firebase:</strong> Real-time database and authentication services.</li>
-                <li><strong>Apple:</strong> Secure sign-in and ecosystem integration.</li>
-            </ul>
+                <h2>4. Cookies</h2>
+                <p>This Service does not explicitly use these "cookies". However, the app may use third-party code and
+                    libraries that use "cookies" to collect information and improve their services. You have the option
+                    to either accept or refuse these cookies and know when a cookie is being sent to your device.</p>
 
-            <h2>5. Your Rights & Deletion</h2>
-            <p>You have full control over your data. You can delete your entire account instantly within the app's
-                <strong>Settings > Account</strong> section, or contact us via email for manual removal.</p>
+                <h2>5. Limitation of Liability</h2>
+                <p>The App is provided on an "AS IS" and "AS AVAILABLE" basis. The Developer makes no representations or
+                    warranties of any kind, express or implied, regarding the use or the results of this App in terms of
+                    its correctness, accuracy, reliability, or otherwise.</p>
+                <p>To the fullest extent permitted by applicable law, the Developer shall not be liable for any direct,
+                    indirect, incidental, special, or consequential damages resulting from the use or inability to use
+                    the App, including but not limited to damages for loss of profits, data, or other intangibles, even
+                    if the Developer has been advised of the possibility of such damages.</p>
 
-            <h2>6. Contact Us</h2>
-            <p>For any questions regarding your privacy, our mission control is ready to help:</p>
-            <p>Email: <a href="mailto:yunusbayazit@outlook.com">yunusbayazit@outlook.com</a></p>
+                <h2>6. Security</h2>
+                <p>We value your trust in providing us your Personal Information, thus we are striving to use
+                    commercially acceptable means of protecting it. But remember that no method of transmission over the
+                    internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its
+                    absolute security.</p>
+
+                <h2>7. Children’s Privacy</h2>
+                <p>These Services do not address anyone under the age of 13. We do not knowingly collect personally
+                    identifiable information from children under 13. In the case we discover that a child under 13 has
+                    provided us with personal information, we immediately delete this from our servers.</p>
+
+                <h2>8. Changes to This Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time. Thus, you are advised to review this page
+                    periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on
+                    this page.</p>
+
+                <h2>9. Contact Us</h2>
+                <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at:
+                </p>
+                <p><a href="mailto:yunusbayazit@outlook.com">yunusbayazit@outlook.com</a></p>
+            </div>
+
+            <!-- Turkish Content -->
+            <div id="tr-content" class="lang-content">
+                <p>
+                    Bu Gizlilik Politikası, <strong>YUNUS EMRE BAYAZIT</strong> ("Geliştirici", "biz" veya "bize")
+                    tarafından Galactic Words ("Uygulama") mobil uygulamasını kullandığınızda hakkınızdaki bilgilerin
+                    nasıl toplandığını, kullanıldığını ve açıklandığını açıklamaktadır.
+                </p>
+                <p>Uygulamayı kullanarak, bilgilerin bu politikaya uygun olarak toplanmasını ve kullanılmasını kabul
+                    etmiş olursunuz.</p>
+
+                <h2>1. Bilgi Toplama ve Kullanımı</h2>
+                <p>Doğrudan herhangi bir kişisel olarak tanımlanabilir bilgi (adınız, adresiniz veya telefon numaranız
+                    gibi) toplamıyoruz. Ancak Uygulama, reklam ve analiz amaçlı olarak sizi tanımlamak için kullanılan
+                    bilgileri toplayabilen üçüncü taraf hizmetler kullanmaktadır.</p>
+
+                <h2>2. Üçüncü Taraf Hizmetleri ve Reklamcılık</h2>
+                <p>Uygulama, sizi tanımlamak için kullanılan bilgileri toplayabilen üçüncü taraf hizmetler kullanır.
+                    Toplanan kesin veriler, cihazınızın İnternet Protokolü ("IP") adresini, cihaz adını, işletim sistemi
+                    sürümünü, uygulamanın yapılandırmasını ve diğer istatistikleri içerebilir.</p>
+                <p>Uygulama tarafından kullanılan üçüncü taraf hizmet sağlayıcılarının gizlilik politikasına bağlantı:
+                </p>
+                <ul>
+                    <li><a href="https://policies.google.com/privacy" target="_blank">Google AdMob & Firebase
+                            Analytics</a></li>
+                </ul>
+
+                <h2>3. Günlük Verileri (Log Data)</h2>
+                <p>Hizmetimizi her kullandığınızda, uygulamada bir hata oluşması durumunda, telefonunuzda Log Data adı
+                    verilen verileri ve bilgileri (üçüncü taraf ürünler aracılığıyla) topladığımızı bildirmek isteriz.
+                    Bu Günlük Verileri, cihazınızın IP adresi, cihaz adı, işletim sistemi sürümü, Hizmetimizi
+                    kullanırken uygulamanın yapılandırması, Hizmeti kullanımınızın saati ve tarihi ve diğer
+                    istatistikler gibi bilgileri içerebilir.</p>
+
+                <h2>4. Çerezler</h2>
+                <p>Bu Hizmet bu "çerezleri" açıkça kullanmaz. Ancak uygulama, bilgi toplamak ve hizmetlerini geliştirmek
+                    için "çerezler" kullanan üçüncü taraf kod ve kitaplıklar kullanabilir. Bu çerezleri kabul etme veya
+                    reddetme ve cihazınıza ne zaman bir çerez gönderildiğini bilme seçeneğine sahipsiniz.</p>
+
+                <h2>5. Sorumluluk Sınırlandırması</h2>
+                <p>Uygulama "OLDUĞU GİBİ" ve "MEVCUT OLDUĞU ŞEKİLDE" sunulmaktadır. Geliştirici, bu Uygulamanın
+                    kullanımına veya kullanım sonuçlarına ilişkin doğruluğu, dakikliği, güvenilirliği veya başka bir
+                    açıdan açık veya zımni hiçbir beyanda bulunmaz veya garanti vermez.</p>
+                <p>Geçerli yasaların izin verdiği en geniş ölçüde Geliştirici; kâr, veri veya diğer maddi olmayan
+                    kayıplar dahil ancak bunlarla sınırlı olmamak üzere Uygulamanın kullanılmasından veya
+                    kullanılamamasından kaynaklanan hiçbir doğrudan, dolaylı, arızi, özel veya sonuçsal zarardan sorumlu
+                    olmayacaktır.</p>
+
+                <h2>6. Güvenlik</h2>
+                <p>Kişisel Bilgilerinizi bize sağlama konusundaki güveninize değer veriyoruz, bu nedenle bu bilgileri
+                    korumak için ticari olarak kabul edilebilir yöntemler kullanmaya çalışıyoruz. Ancak internet
+                    üzerinden hiçbir iletim yönteminin veya elektronik depolama yönteminin %100 güvenli ve güvenilir
+                    olmadığını ve mutlak güvenliğini garanti edemeyeceğimizi unutmayın.</p>
+
+                <h2>7. Çocukların Gizliliği</h2>
+                <p>Bu Hizmetler 13 yaşın altındaki hiç kimseye hitap etmemektedir. 13 yaşın altındaki çocuklardan
+                    bilerek kişisel olarak tanımlanabilir bilgiler toplamıyoruz. 13 yaşın altındaki bir çocuğun bize
+                    kişisel bilgiler sağladığını fark etmemiz durumunda, bunları sunucularımızdan derhal siliyoruz.</p>
+
+                <h2>8. Bu Gizlilik Politikasında Değişiklikler</h2>
+                <p>Gizlilik Politikamızı zaman zaman güncelleyebiliriz. Bu nedenle, herhangi bir değişiklik için bu
+                    sayfayı periyodik olarak gözden geçirmeniz önerilir. Bu sayfada yeni Gizlilik Politikasını
+                    yayınlayarak herhangi bir değişikliği size bildireceğiz.</p>
+
+                <h2>9. Bize Ulaşın</h2>
+                <p>Gizlilik Politikamızla ilgili herhangi bir sorunuz veya öneriniz varsa, bizimle iletişime geçmekten
+                    çekinmeyin:</p>
+                <p><a href="mailto:yunusbayazit@outlook.com">yunusbayazit@outlook.com</a></p>
+            </div>
         </main>
 
         <footer class="footer">
@@ -267,6 +429,15 @@
     </div>
 
     <script>
+        function setLang(lang) {
+            document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(lang + '-content').classList.add('active');
+            document.getElementById(lang + '-title').classList.add('active');
+            event.target.classList.add('active');
+        }
+
         const starsContainer = document.getElementById('stars');
         for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');

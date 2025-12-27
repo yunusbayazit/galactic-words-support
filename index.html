@@ -5,12 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galactic Words - Word Puzzle Adventure</title>
-    <meta name="description"
-        content="Connect letters, discover words, and embark on an intergalactic adventure. Download Galactic Words now!">
+    <meta name="description" content="Connect letters, discover words, and embark on an intergalactic adventure. Download Galactic Words now!">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --primary: #8B5CF6;
+            --primary-glow: rgba(139, 92, 246, 0.5);
+            --accent: #FBBF24;
+            --bg-dark: #0F172A;
+            --bg-darker: #020617;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #FFFFFF;
+            --text-muted: #94A3B8;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,247 +32,290 @@
         }
 
         body {
-            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a1a 100%);
-            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-darker);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.15) 0%, transparent 40%);
+            color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Stars Background */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 20px;
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 60px 0 40px;
+            margin-bottom: 80px;
+            padding-top: 40px;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B00 100%);
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFF 0%, #A78BFA 50%, #8B5CF6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 16px;
         }
 
         .hero .tagline {
-            font-size: 1.3rem;
-            color: #aaa;
-            margin-bottom: 40px;
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: var(--text-muted);
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto 40px;
         }
 
-        /* Single Image Showcase */
+        /* Phone Showcase */
         .showcase {
             display: flex;
             justify-content: center;
-            margin: 20px 0 50px;
+            margin-bottom: 80px;
             perspective: 1000px;
         }
 
         .phone-frame {
             position: relative;
-            width: 300px;
-            /* iPhone 14 Pro aspect ratio approx 19.5:9 */
+            width: 280px;
             aspect-ratio: 9/19.5;
-            border-radius: 40px;
-            border: 8px solid #2a2a4a;
-            box-shadow:
-                0 30px 80px rgba(0, 0, 0, 0.6),
-                0 0 0 2px rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-            background: #000;
-            transform: rotateY(-5deg) rotateX(5deg);
-            transition: transform 0.5s ease;
+            border-radius: 44px;
+            padding: 12px;
+            background: #111;
+            box-shadow: 
+                0 0 0 2px rgba(255,255,255,0.1),
+                0 40px 100px rgba(0,0,0,0.8),
+                0 0 40px var(--primary-glow);
+            transform: rotateY(-10deg) rotateX(5deg);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .phone-frame:hover {
-            transform: rotateY(0) rotateX(0) scale(1.02);
-            box-shadow:
-                0 40px 100px rgba(0, 0, 0, 0.7),
-                0 0 0 2px rgba(255, 215, 0, 0.3);
-            border-color: #3a3a5a;
+            transform: rotateY(0deg) rotateX(0deg) scale(1.05);
+            box-shadow: 
+                0 0 0 2px rgba(255,255,255,0.2),
+                0 50px 120px rgba(0,0,0,0.9),
+                0 0 60px var(--primary-glow);
         }
 
-        .phone-frame img {
-            display: block;
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            border-radius: 34px;
+            overflow: hidden;
+            background: var(--bg-dark);
+            position: relative;
+        }
+
+        .screen-content img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Ensures image fills the frame */
-            object-position: center;
         }
 
-        /* Download Button */
-        .download-section {
-            text-align: center;
-            margin: 40px 0 60px;
-        }
-
-        .app-store-btn {
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-
-        .app-store-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .app-store-btn img {
-            height: 60px;
-        }
-
-        /* Features */
-        .features-title {
-            text-align: center;
-            font-size: 2rem;
-            margin: 40px 0 40px;
-            color: #FFD700;
-        }
-
+        /* Features Grid */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 80px;
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 28px;
+        .feature-box {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
             text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
-        .feature-card:hover {
+        .feature-box:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
             transform: translateY(-5px);
-            border-color: rgba(255, 215, 0, 0.3);
         }
 
         .feature-icon {
-            font-size: 2.2rem;
-            margin-bottom: 14px;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
         }
 
-        .feature-card h3 {
-            font-size: 1.1rem;
+        .feature-box h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
             margin-bottom: 10px;
-            color: #fff;
+            color: var(--text-main);
         }
 
-        .feature-card p {
-            color: #888;
-            line-height: 1.5;
+        .feature-box p {
+            color: var(--text-muted);
             font-size: 0.95rem;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .btn-download {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-download:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-download img {
+            height: 64px;
         }
 
         /* Footer */
         .footer {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 40px;
             text-align: center;
-            padding: 50px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            margin-top: 60px;
         }
 
-        .footer-links {
+        .footer-nav {
             display: flex;
             justify-content: center;
-            gap: 32px;
-            margin-bottom: 20px;
+            gap: 40px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
         }
 
-        .footer-links a {
-            color: #888;
+        .footer-nav a {
+            color: var(--text-muted);
             text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
             transition: color 0.3s ease;
         }
 
-        .footer-links a:hover {
-            color: #FFD700;
+        .footer-nav a:hover {
+            color: var(--primary);
         }
 
-        .footer p {
-            color: #555;
+        .copyright {
+            color: #4B5563;
             font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero .tagline {
-                font-size: 1rem;
-            }
-
-            .phone-frame {
-                width: 240px;
-                transform: none;
-            }
+            .hero h1 { font-size: 3rem; }
+            .container { padding: 40px 20px; }
+            .footer-nav { gap: 20px; }
         }
     </style>
 </head>
 
 <body>
+    <div class="stars-container" id="stars"></div>
+
     <div class="container">
-        <section class="hero">
+        <header class="hero">
             <h1>Galactic Words</h1>
-            <p class="tagline">Connect letters. Discover words. Explore the universe.</p>
+            <p class="tagline">The most atmospheric word puzzle adventure in the universe. Connect, discover, and conquer the stars.</p>
+        </header>
+
+        <section class="showcase">
+            <div class="phone-frame">
+                <div class="screen-content">
+                    <img src="screenshot1.png" alt="Galactic Words Preview">
+                </div>
+            </div>
         </section>
 
-        <div class="showcase">
-            <div class="phone-frame">
-                <img src="screenshot1.png" alt="Galactic Words App Preview">
-            </div>
-        </div>
-
-        <div class="download-section">
-            <a href="https://apps.apple.com/app/galactic-words" class="app-store-btn" target="_blank">
-                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                    alt="Download on the App Store">
+        <section class="cta-section">
+            <a href="https://apps.apple.com/app/galactic-words" class="btn-download" target="_blank">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
             </a>
-        </div>
+        </section>
 
         <section class="features">
-            <div class="feature-card">
-                <div class="feature-icon">🌍</div>
-                <h3>100+ Unique Levels</h3>
-                <p>Explore planets from Mars to Neptune with new challenges on every world.</p>
+            <div class="feature-box">
+                <span class="feature-icon">✨</span>
+                <h3>Premium Design</h3>
+                <p>Immerse yourself in a stunning cosmic interface with fluid animations.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🧠</div>
-                <h3>Brain Training</h3>
-                <p>Strengthen your vocabulary and enhance problem-solving skills.</p>
+            <div class="feature-box">
+                <span class="feature-icon">🪐</span>
+                <h3>Epic Journey</h3>
+                <p>Unlock hundreds of levels across unique planetary systems.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎁</div>
-                <h3>Daily Rewards</h3>
-                <p>Spin the Cosmic Wheel every day to win gold and bonuses.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📶</div>
-                <h3>Offline Play</h3>
-                <p>No internet required. Play anytime, anywhere.</p>
+            <div class="feature-box">
+                <span class="feature-icon">🧠</span>
+                <h3>Daily Training</h3>
+                <p>Sharpen your vocabulary and mental agility every single day.</p>
             </div>
         </section>
 
         <footer class="footer">
-            <div class="footer-links">
-                <a href="support.html">Support</a>
+            <nav class="footer-nav">
+                <a href="support.html">Support Hub</a>
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="terms.html">Terms of Service</a>
-            </div>
-            <p>© 2025 Yunus Emre Bayazit. All rights reserved.</p>
+            </nav>
+            <p class="copyright">© 2025 Yunus Emre Bayazit. Handcrafted with passion.</p>
         </footer>
     </div>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        const count = 150;
+        for (let i = 0; i < count; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            star.style.opacity = Math.random();
+            starsContainer.appendChild(star);
+        }
+    </script>
 </body>
 
 </html>

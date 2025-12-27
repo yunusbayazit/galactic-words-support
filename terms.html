@@ -5,7 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - Galactic Words</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
     <style>
+        :root {
+            --primary: #8B5CF6;
+            --primary-glow: rgba(139, 92, 246, 0.5);
+            --accent: #FBBF24;
+            --bg-dark: #0F172A;
+            --bg-darker: #020617;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #FFFFFF;
+            --text-muted: #94A3B8;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,141 +33,233 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 100%);
-            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-darker);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 40%);
+            color: var(--text-main);
             min-height: 100vh;
-            padding: 40px 20px;
+            line-height: 1.7;
+        }
+
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
         }
 
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .header {
+            margin-bottom: 60px;
+            text-align: center;
         }
 
         h1 {
-            font-size: 2rem;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFF 0%, #FBBF24 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 12px;
         }
 
-        .date {
-            color: #888;
-            margin-bottom: 30px;
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .content-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 48px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         h2 {
-            font-size: 1.2rem;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            color: #4FC3F7;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 40px 0 16px;
         }
 
-        p,
-        li {
-            color: #ccc;
-            line-height: 1.7;
-            margin-bottom: 12px;
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
         }
 
         ul {
-            margin-left: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
+            list-style: none;
         }
 
-        a {
-            color: #4FC3F7;
+        li {
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
         }
 
-        .back {
-            display: inline-block;
-            margin-top: 30px;
-            color: #888;
-            text-decoration: none;
+        li::before {
+            content: "✦";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
         }
 
-        .back:hover {
-            color: #fff;
+        strong {
+            color: var(--text-main);
+            font-weight: 600;
         }
 
         .footer {
+            margin-top: 60px;
             text-align: center;
-            margin-top: 40px;
-            color: #666;
-            font-size: 0.85rem;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent);
+            transform: translateX(-4px);
+        }
+
+        @media (max-width: 640px) {
+            .content-card {
+                padding: 32px 24px;
+            }
+
+            .container {
+                padding: 40px 16px;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="stars-container" id="stars"></div>
+
     <div class="container">
-        <h1>Terms of Service</h1>
-        <p class="date">Last updated: December 17, 2025</p>
+        <header class="header">
+            <h1>Terms of Service</h1>
+            <p class="last-updated">Last updated: December 27, 2025</p>
+        </header>
 
-        <p>
-            Welcome to Galactic Words. By downloading or using the app, you agree to these terms.
-        </p>
+        <main class="content-card">
+            <p>
+                By embarking on your journey with <strong>Galactic Words</strong>, you agree to these fundamental rules
+                of the universe.
+            </p>
 
-        <h2>Use of the App</h2>
-        <p>
-            Galactic Words is a word puzzle game for entertainment purposes.
-            You may use the app for personal, non-commercial use only.
-        </p>
+            <h2>1. Galactic License</h2>
+            <p>We grant you a personal, non-exclusive license to explore the word puzzles within Galactic Words. This
+                license is for your personal entertainment and cannot be commercially exploited.</p>
 
-        <h2>In-App Purchases</h2>
-        <p>
-            The app offers optional in-app purchases for virtual currency (coins).
-            All purchases are final and non-refundable, except as required by applicable law.
-            Virtual currency has no real-world value and cannot be exchanged for cash.
-        </p>
+            <h2>2. Cosmic Conduct</h2>
+            <p>To keep the galaxy fair for everyone, you agree <strong>not</strong> to:</p>
+            <ul>
+                <li>Deploy automated bots or scripts to solve puzzles.</li>
+                <li>Attempt to reverse engineer the warp engine (the app code).</li>
+                <li>Exploit any wormholes (bugs) found during your journey.</li>
+            </ul>
 
-        <h2>User Conduct</h2>
-        <p>You agree not to:</p>
-        <ul>
-            <li>Use cheats, exploits, or unauthorized third-party tools</li>
-            <li>Attempt to reverse engineer or modify the app</li>
-            <li>Use the app for any illegal purpose</li>
-        </ul>
+            <h2>3. Virtual Currency & Goods</h2>
+            <p>Virtual currency (Coins) earned or purchased within the app has no real-world value. It is meant solely
+                for unlocking intergalactic hints and features. All sales are managed via Apple's secure ecosystems.</p>
 
-        <h2>Intellectual Property</h2>
-        <p>
-            All content in Galactic Words, including graphics, text, and gameplay elements,
-            is owned by Yunus Emre Bayazit and protected by copyright law.
-        </p>
+            <h2>4. Journey Data</h2>
+            <p>While we strive for 99.9% uptime, we do not guarantee and are not responsible for progress lost due to
+                cosmic radiation (server issues) or individual hardware failure, though we will do our best to assist in
+                recovery.</p>
 
-        <h2>Disclaimer</h2>
-        <p>
-            The app is provided "as is" without warranties of any kind.
-            We do not guarantee uninterrupted or error-free operation.
-        </p>
+            <h2>5. Amendments</h2>
+            <p>As the universe expands, our terms may update. Significant changes will be announced within the mission
+                control station (the app's announcements section).</p>
 
-        <h2>Limitation of Liability</h2>
-        <p>
-            To the fullest extent permitted by law, we shall not be liable for any
-            indirect, incidental, or consequential damages arising from your use of the app.
-        </p>
+            <h2>6. Liability</h2>
+            <p>Galactic Words is provided "as-is". We are not liable for any secondary effects of playing, such as
+                excessive intelligence, expanded vocabulary, or cosmic joy.</p>
 
-        <h2>Changes to Terms</h2>
-        <p>
-            We reserve the right to modify these terms at any time.
-            Continued use of the app after changes constitutes acceptance of the new terms.
-        </p>
+            <p style="margin-top: 40px;">
+                For any inquiries regarding these terms: <br>
+                <strong>yunusbayazit@outlook.com</strong>
+            </p>
+        </main>
 
-        <h2>Contact</h2>
-        <p>
-            For questions about these Terms, contact us at:<br>
-            Email: <a href="mailto:yunusbayazit@outlook.com">yunusbayazit@outlook.com</a>
-        </p>
-
-        <a href="index.html" class="back">← Back to Support</a>
-
-        <div class="footer">
-            <p>© 2025 Yunus Emre Bayazit. All rights reserved.</p>
-        </div>
+        <footer class="footer">
+            <a href="index.html" class="btn-back">← Back to Hub</a>
+        </footer>
     </div>
+
+    <script>
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2 + 0.5;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', (Math.random() * 4 + 3) + 's');
+            starsContainer.appendChild(star);
+        }
+    </script>
 </body>
 
 </html>

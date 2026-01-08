@@ -17,9 +17,6 @@ For assistance with the app, please visit our support resources:
 - **[Terms of Service](https://yunusbayazit.github.io/galactic-words-support/terms.html)**
   Review the terms and conditions for using Galactic Words.
 
-- **[App Ads Info](https://yunusbayazit.github.io/galactic-words-support/app-ads.txt)**
-  Authorized Digital Sellers file.
-
 ## Frequently Asked Questions
 
 ### How do I restore my purchases?
